@@ -1,13 +1,19 @@
 import React, {useState,useEffect} from 'react';
-import Axios from "axios";
-import Header from 
+import axios from "axios";
+
+import Header from './components/Header'; // Yol bilgisini doğru şekilde güncelleyin
+import Karakterler from './components/Karakterler';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 const App = () => {
-  const [karakterler,setKarakterler]=useState([]);//karakterler statende tutacağız.
+  const [karakterler ,setKarakterler]=useState([]);//karakterler statende tutacağız.
   useEffect(()=>{
-let url = "";
+  let url = "https://swapi.dev/api/people/";
 axios.get(url)
 .then(response=>{
-  console.log(response.data)
+  console.log(response.data);
   setKarakterler(response.data);
 }) 
 .catch(err=>{
@@ -23,7 +29,11 @@ axios.get(url)
 
   return (
     <div className="App">
-      <h1 className="Header">Karakter</h1>
+      <Header/>
+      <Karakterler karakterler={karakterler}/>
+ 
+      
+    
     </div>
   );
 }
